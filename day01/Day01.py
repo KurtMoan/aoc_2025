@@ -32,26 +32,25 @@ class Day01:
             pp = position
             direction = line[0]
             distance = int(line[1:])
-            hundreds = 0
+            hundreds = distance // 100
+            distance = distance % 100
+            total += hundreds
             # print("Direction:", direction, "Distance:", distance)
             if direction == 'L':
                 position -= distance
             elif direction == 'R':
                 position += distance
             
-            if position < 0:
-                hundreds = (abs(position) // 100) + 1
-                position += hundreds * 100
-            if position >= 100:
-                hundreds = position // 100
-                position -= hundreds * 100
-            
-            if hundreds > 0:
-                total += hundreds
-                if pp == 0 and direction == 'L':
-                    total -= 1
-            elif position == 0:
+            if position == 0:
                 total += 1
+            elif position < 0:
+                position += 100
+                if pp != 0:
+                    total += 1
+            elif position >= 100:
+                position -= 100
+                total += 1
+            
             # total += hundreds
             if direction == 'L':
                 print ("input:", line, "## Position:", position, " <-- ", pp, "Hundreds Crossed:", hundreds, "Total:", total)   
