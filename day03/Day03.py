@@ -21,40 +21,40 @@ class Day03:
             sum += int(first_digit + second_digit)
         return sum
 
-    def get_first_digit(self, line, location, length):
-        print(f"Finding first digit in length {length}, starting at location {location}")
-        first_digit = line[len(line)-length-1]
-        first_digit_loc = len(line)-length-1
-        print(f"Initial first digit: {first_digit} at location {first_digit_loc}")
+    def get_largest_digit(self, line, location, length):
+        # print(f"Finding largest digit in length {length}, starting at location {location}")
+        largest_digit = line[len(line)-length]
+        largest_digit_loc = len(line)-length
+        # print(f"Initial largest digit: {largest_digit} at location {largest_digit_loc}")
         for i in range(len(line)-length-1, location-1, -1):
-            if int(line[i]) >= int(first_digit):
-                first_digit = line[i]
-                first_digit_loc = i
-                # print(f"New first digit: {first_digit} at location {first_digit_loc}")
-        print(f"Final first digit: {first_digit} at location {first_digit_loc}")
-        return first_digit, first_digit_loc
-    
+            if int(line[i]) >= int(largest_digit):
+                largest_digit = line[i]
+                largest_digit_loc = i
+                # print(f"New largest digit: {largest_digit} at location {largest_digit_loc}")
+        # print(f"Final largest digit: {largest_digit} at location {largest_digit_loc}")
+        return largest_digit, largest_digit_loc
+
     def part2(self, input_data):
         sum = 0
         for line in input_data.splitlines():
             digits = ''
             length = 12
             location = 0
-            print("-----")
+            # print("-----")
             print(line)
             for l in range(length, 0, -1):
-                first_digit, location = self.get_first_digit(line, location, l)
-                print(f"First digit: {first_digit} at location {location}")
+                first_digit, location = self.get_largest_digit(line, location, l)
                 digits += first_digit
                 location += 1
             print(f"Digits so far: {digits}")
             sum += int(digits)
+            print(f"Sum so far: {sum}")
         return sum
 
 if __name__ == "__main__":
     day = Day03()
-    with open("day03/test.txt") as f:
-    # with open("day03/input.txt") as f:
+    # with open("day03/test.txt") as f:
+    with open("day03/input.txt") as f:
         input_data = f.read().strip()
     # print("Part 1:", day.part1(input_data))
     print("Part 2:", day.part2(input_data))
