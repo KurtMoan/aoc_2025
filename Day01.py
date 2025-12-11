@@ -60,8 +60,13 @@ class Day01:
         print("Code", total)
     
 if __name__ == "__main__":
-    import sys
-    input_data = sys.stdin.read()
-    day01 = Day01()
-    # day01.part1(input_data)
-    day01.part2(input_data)
+    day = Day01()
+    with open("day01/test.txt") as f:
+    # with open("day01/input.txt") as f:
+        input_data = f.read().strip()
+
+    result_part1 = day.part1(input_data)
+    print(f"Part 1 Result: {result_part1}")
+
+    result_part2 = day.part2(input_data)
+    print(f"Part 2 Result: {result_part2}")
